@@ -1,0 +1,13 @@
+Well done!
+
+4
+a) -0.25
+The condition for EmailPromotion was not "not EDUAL", it was "not INCLUDING".
+Correct answer: 
+SELECT COUNT(DISTINCT PersonType) AS DistinctCount
+FROM Person.Person
+WHERE LastName LIKE 'M%' 
+		OR NOT EmailPromotion LIKE '%1%'
+    
+    
+Mark: 10
