@@ -1,0 +1,15 @@
+Well done!
+
+2
+a) -0.25
+You lost a condition for Cost IS NULL
+
+b)-0.5
+You don't have the parentheses in the WHERE clause. It gives you the incorrect result at all. OR condition messes up everything.
+Correct answer:
+...WHERE StandardPrice>10 
+		AND (Name LIKE '%X%'
+			OR 
+			Name LIKE 'N%')
+      
+Mark: 9
