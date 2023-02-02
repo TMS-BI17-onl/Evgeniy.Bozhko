@@ -1,0 +1,18 @@
+Task1
+SELECT Name, Experience, Registration
+FROM Drivers
+WHERE Experience NOT IN (3, 5, 6, 10)
+AND Registation LIKE 'eee'
+
+Task2
+SELECT Drivers.DriverID, Drivers.Passport 
+FROM Drivers
+LEFT JOIN СontrolRoom ON Drivers.DriverID=ControlRoom.DriverID
+WHERE ControlRoom.DriverID IS NULL
+
+Task3
+SELECT Cars.CarRegistrationNumber, ControlRoom.ArrivalTime, ControlRoom.DepartureTime, Route.Destination
+FROM ControlRoom
+INNER JOIN Cars ON ControlRoom.CarID=Cars.CarID
+INNER JOIN Route ON ControlRoom.Voucher=Route.RouteID
+WHERE Cars.ProductionYear=2015
