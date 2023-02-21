@@ -1,0 +1,43 @@
+--Task 1
+SELECT FirstName, MiddleName, LastName, PhoneNumber
+FROM Person.Person p
+LEFT JOIN Person.PersonPhone pp ON p.BusinessEntityID=pp.BusinessEntityID
+WHERE pp.PhoneNumber LIKE '4_5%'
+
+--Task2
+SELECT BusinessEntityID, 
+AgeCategory=CASE 
+WHEN DATEDIFF (DAY, HumanResources.Employee.BirthDate, GETDATE ())/365 BETWEEN 17 AND 20 THEN 'Adolescence'
+WHEN DATEDIFF (DAY, HumanResources.Employee.BirthDate, GETDATE ())/365 BETWEEN 21 AND 59 THEN 'Adults'
+WHEN DATEDIFF (DAY, HumanResources.Employee.BirthDate, GETDATE ())/365 BETWEEN 60 AND 75 THEN 'Elderly'
+WHEN DATEDIFF (DAY, HumanResources.Employee.BirthDate, GETDATE ())/365 BETWEEN 76 AND 90 THEN 'Senile'
+END
+FROM HumanResources.Employee
+
+
+--Task 3
+WITH MaxStandardCost_CTE 
+AS
+(
+SELECT Name, Color, StandardCost, MAX (StandardCost) OVER (PARTITION BY Color) AS MaxStandardCost
+FROM Production.Product
+)
+SELECT Name, Color
+FROM MaxStandardCost_CTE
+WHERE StandardCost=MaxStandardCost
+
+/*Task 4
+Аптека:
+- Сотрудники (ID_Сотрудника, ФИО, Должность, Оклад, Дата приема, Дата увольнения)
+- Препараты (ID_Препарата, Наименование, Дата производства, Срок годности, Поставщик, Стоимость поставщика, Стоимость реализации)
+- Склады (ID_Склада, Наименование, Адрес, Площадь)
+- Скидки (ID_Скидки, Наименование, Процент, Дата начала, Дата окончания)
+- Покупатели (юридические лица) (ID_Покупателя, УНП, Наименование, Адрес, Телефон)
+- Продажи (ID_Продажи, ID_Препарата, ID_Сотрудника, ID_Скидки, ID_Покупателя, Дата продажи)
+- Утилизация (ID_Утилизации, ID_Препарата, ID_Сотрудника, ID_Склада, Наименование контрагента, Дата передачи, Стоимость утилизации)
+
+Задачи:
+- Какая стоимость препаратов GlaxoSmithKline, проданных за 2022 год?
+- Какой процент утилизации приобретенных препаратов в по каждому поставщику за 2022 год?
+*/
+
