@@ -14,7 +14,6 @@ WHEN DATEDIFF (DAY, HumanResources.Employee.BirthDate, GETDATE ())/365 BETWEEN 7
 END
 FROM HumanResources.Employee
 
-
 --Task 3
 WITH MaxStandardCost_CTE 
 AS
@@ -27,7 +26,9 @@ FROM MaxStandardCost_CTE
 WHERE StandardCost=MaxStandardCost
 
 /*Task 4
-Аптека:
+Аптека
+
+Сущности:
 - Сотрудники (ID_Сотрудника, ФИО, Должность, Оклад, Дата приема, Дата увольнения)
 - Препараты (ID_Препарата, Наименование, Дата производства, Срок годности, Поставщик, Стоимость поставщика, Стоимость реализации)
 - Склады (ID_Склада, Наименование, Адрес, Площадь)
@@ -40,4 +41,3 @@ WHERE StandardCost=MaxStandardCost
 - Какая стоимость препаратов GlaxoSmithKline, проданных за 2022 год?
 - Какой процент утилизации приобретенных препаратов в по каждому поставщику за 2022 год?
 */
-
