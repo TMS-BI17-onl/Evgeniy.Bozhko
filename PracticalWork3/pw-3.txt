@@ -8,11 +8,11 @@ PIVOT
 (COUNT (ФактБолезни) FOR НазваниеБолезни IN (Болезнь1, Болезнь2, БолезньN)) AS PivotTable
 
 Task 2
-SELECT CAST (COUNT (DATEDIFF (DAY, ISNULL (ДатаВремяУборки, 0), ISNULL (ДатаВремяКормления, 0))) AS FLOAT) /
+SELECT CAST (COUNT (DATEDIFF (SECOND, ISNULL (ДатаВремяУборки, 0), ISNULL (ДатаВремяКормления, 0))) AS FLOAT) /
 (SELECT CAST (COUNT (1) AS FLOAT)
 FROM Уход) * 100 AS ПроцентКормленияДоУборки
 FROM Уход
-WHERE DATEDIFF (DAY, ISNULL (ДатаВремяУборки, 0), ISNULL (ДатаВремяКормления, 0)) < 0
+WHERE DATEDIFF (SECOND, ISNULL (ДатаВремяУборки, 0), ISNULL (ДатаВремяКормления, 0)) < 0
 
 
 
