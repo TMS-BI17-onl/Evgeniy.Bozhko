@@ -24,3 +24,4 @@ WHEN NOT MATCHED AND Barbara IS NOT NULL
 
 
 Mark: 8
+Test mark: 10
