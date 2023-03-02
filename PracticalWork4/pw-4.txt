@@ -1,0 +1,30 @@
+Task 1
+INSERT INTO manufacturer (id, name, country_id)
+VALUES (5, 'HP', 4)
+
+Task 2
+UPDATE user
+SET age=age/3
+WHERE name='Andrey'
+
+Task 3
+SELECT name, price
+FROM product
+WHERE price = (SELECT MAX (price)
+		FROM product)
+
+Task 4
+SELECT u.name, p.name, u.age 
+FROM user u LEFT JOIN phone p ON u.id=p.user_id
+WHERE p.name LIKE '+3%4' OR u.age>35
+
+Task 5
+SELECT TOP 5 WITH TIES c.u_id, c.cnt
+FROM
+(
+SELECT u.id AS u_id, COUNT (1) AS cnt
+FROM order o JOIN user u ON o.user_id=u.id
+JOIN product p ON o.product_id=p.id
+GROUP BY u.id
+) c
+ORDER BY c.cnt DESC
