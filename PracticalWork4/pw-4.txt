@@ -28,3 +28,5 @@ JOIN product p ON o.product_id=p.id
 GROUP BY u.id
 ) c
 ORDER BY c.cnt DESC
+
+Mark: 9
