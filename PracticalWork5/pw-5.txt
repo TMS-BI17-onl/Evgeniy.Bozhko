@@ -50,3 +50,5 @@ WHERE Email=alex@gmail.com
 WHERE Is_Read=False
 GROUP BY Category
 HAVING COUNT (Is_Read)>50
+
+Mark: 10
