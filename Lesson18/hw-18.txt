@@ -1,0 +1,47 @@
+Task 1
+SELECT t2.First_Name, t2.Last_Name, COUNT (t1.Manager_ID) AS CntofEmployees
+FROM Employees t1 JOIN Employees t2 ON t1.Manager_ID=t2.Employee_ID
+GROUP BY t2.First_Name, t2.Last_Name
+HAVING COUNT (t1.Manager_ID)>6
+
+Task 2
+SELECT Department_Name, MAX (SalarywithCommision) AS MaxSalary, MIN (SalarywithCommision) AS MinSalary
+FROM
+(
+SELECT Department_Name, Salary*(1-Comission_Pct/100) AS SalarywithCommision
+FROM Employees e JOIN Departments d ON e.Department_ID=d.Department_ID 
+) s
+GROUP BY Department_Name
+
+Task 3
+SELECT TOP 1 WITH TIES Region_Name
+FROM
+(
+SELECT Region_Name, COUNT (Employee_ID) AS CntofEmployees
+FROM Employees e JOIN Departments d ON e.Department_ID=d.Department_ID JOIN Locations l ON d.Location_ID=l.Location_ID
+JOIN Countries c ON l.Country_ID=c.Country_ID JOIN Regions r ON c.Region_ID=r.Region_ID
+GROUP BY Region_Name
+) c
+ORDER BY CntofEmployees DESC
+
+Task 4
+SELECT DISTINCT Department_Name, AvgSalary/AvgSalarybyDepartment*100-100 AS PctofDeviation
+FROM
+(
+SELECT Department_Name, AVG (Salary) OVER () AS AvgSalary, AVG (Salary) OVER (PARTITION BY Department_Name) AvgSalarybyDepartment
+FROM Employees e JOIN Departments d ON e.Department_ID=d.Department_ID 
+) a
+
+Task 5
+SELECT First_Name, Last_Name, Department_Name, DATEDIFF (YEAR, End_Date, Start_Date) AS Term
+FROM Employees e JOIN Job_History j ON e.Employee_ID=j.Employee_ID JOIN Departments d ON j.Department_ID=d.Department_ID 
+WHERE DATEDIFF (YEAR, End_Date, Start_Date)>10
+
+Task 6
+SELECT First_Name, Last_Name, PlacebySalary
+FROM
+(
+SELECT First_Name, Last_Name, RANK () OVER (ORDER BY Salary DESC) AS PlacebySalary
+FROM Employees
+) p
+WHERE PlacebySalary BETWEEN 5 AND 10
